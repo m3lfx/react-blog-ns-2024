@@ -1,9 +1,14 @@
 import React from 'react'
 
-const Title = () => {
-  return (
-    <div>Home</div>
-  )
+const Title = (props) => {
+    console.log(props)
+    return (
+        <div>
+            <div>{props.name}</div>
+            <div>{props.subTitle}</div>
+        </div>
+
+    )
 }
 
 export default Title

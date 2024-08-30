@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Nav from './Nav';
+import Title from './Title';
 const Create = () => (
     <div className="container p-5">
-       
+       <Title name="create blog post" subTitle="my comment"  />
         <h1>CREATE POST</h1>
         <br />
         <form>
