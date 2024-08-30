@@ -10,6 +10,13 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
+mongoose
+    .connect(process.env.DATABASE, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('DB connected'))
+    .catch(err => console.log(err));
 app.get('*', (req, res) => {
     res.json({
         data: 'You reached nodejs api for react node crud app'
