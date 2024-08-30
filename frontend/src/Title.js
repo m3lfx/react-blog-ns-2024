@@ -1,11 +1,12 @@
 import React from 'react'
 
-const Title = (props) => {
-    console.log(props)
+const Title = ({name, subTitle}) => {
+    console.log(name, subTitle)
     return (
         <div>
-            <div>{props.name}</div>
-            <div>{props.subTitle}</div>
+            <div>{name}</div>
+            {/* <div>{subTitle}</div> */}
+            {subTitle ? <h2>{subTitle}</h2> : <p>no sub title</p>}
         </div>
 
     )
