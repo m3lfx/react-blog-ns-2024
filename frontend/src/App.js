@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import './App.css';
 import Nav from './Nav';
 import Title from './Title';
@@ -25,12 +26,15 @@ const App = () => {
       {posts.length > 0 ? posts.map((post, i) => (
         <div className="row" key={post._id} style={{ borderBottom: '1px solid silver' }}>
           <div className="col pt-3 pb-2">
-            <h2>{post.title}</h2>
+          <Link to={`/post/${post.slug}`}>
+              <h2>{post.title}</h2>
+            </Link>
             <p className="lead">{post.content.substring(0, 100)}</p>
             <p>
               Author <span className="badge">{post.user}</span> Published on{' '}
               <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
             </p>
+           
           </div>
         </div>
       )) : <h1>no posts</h1>}
