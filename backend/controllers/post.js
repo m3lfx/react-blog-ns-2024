@@ -1,6 +1,6 @@
 const Post = require('../models/post');
 const slugify = require('slugify');
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // console.log(req.body);
     const { title, content, user } = req.body;
     const slug = slugify(title);
@@ -14,8 +14,8 @@ exports.create = (req, res) => {
 
     }
     // create post
-    const post = Post.create({ title, content, user, slug })
-
+    const post = await Post.create({ title, content, user, slug })
+console.log(post)
     if(post)
         return res.status(200).json(post)
     return res.status(400).json({error: "post create error"})
