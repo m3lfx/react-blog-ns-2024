@@ -20,3 +20,14 @@ console.log(post)
         return res.status(200).json(post)
     return res.status(400).json({error: "post create error"})
 };
+
+exports.list = async (req, res) => {
+    const posts = await Post.find({})
+        .limit(10)
+        .sort({ createdAt: 'desc' })
+        .exec();
+    
+        if(posts) 
+            return res.status(200).json(posts)
+        return res.status(400).json({error: "list posts error"}) 
+};
