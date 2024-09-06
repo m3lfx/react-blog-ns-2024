@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Title from './Title';
 import axios from 'axios'
@@ -9,6 +10,7 @@ const Create = () => {
         content: '',
         user: ''
     });
+    const navigate = useNavigate();
     const { title, content, user } = state;
 
     const handleChange = name => event => {
@@ -27,7 +29,7 @@ const Create = () => {
                 // empty state
                 setState({ ...state, title: '', content: '', user: '' });
                 // show sucess alert
-                alert(`Post titled ${response.data.title} is created`);
+               navigate('/')
             })
             .catch(error => {
                 console.log(error.response);
