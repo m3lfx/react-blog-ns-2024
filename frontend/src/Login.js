@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
-import { authenticate } from './helpers';
+import { authenticate, getUser } from './helpers';
 
 const Login = () => {
     // create a state
@@ -36,6 +36,10 @@ const Login = () => {
                 alert(error.response.data.error);
             });
     };
+
+    useEffect(() => {
+        getUser() && navigate('/');
+    }, []);
 
     return (
         <div className="container pb-5">
