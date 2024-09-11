@@ -53,6 +53,9 @@ const App = () => {
               Author <span className="badge">{post.user}</span> Published on{' '}
               <span className="badge">{new Date(post.createdAt).toLocaleString()}</span>
             </p>
+            <Link to={`/post/update/${post.slug}`} className="btn btn-sm btn-outline-warning">
+            Update
+          </Link>
             <button
               onClick={() => deleteConfirm(post.slug)}
               className="btn btn-sm btn-outline-danger ml-1"
