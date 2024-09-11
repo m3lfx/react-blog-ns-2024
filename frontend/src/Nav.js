@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Nav = () => {
     return (
@@ -10,6 +10,9 @@ const Nav = () => {
                 </li>
                 <li className="nav-item pr-3 pt-3 pb-3">
                     <Link to="/create">Create</Link>
+                </li>
+                <li className="nav-item ml-auto pr-3 pt-3 pb-3">
+                    <Link to="/login">Login</Link>
                 </li>
             </ul>
         </nav>
