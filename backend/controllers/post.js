@@ -42,3 +42,24 @@ exports.read = async (req, res) => {
         return res.status(400).json({ error: "post error" })
     return res.status(200).json(post)
 }; 
+
+exports.update = async (req, res) => {
+    const { slug } = req.params;
+    const { title, content, user } = req.body;
+    const newSlug = slugify(title);
+    const post = await Post.findOneAndUpdate({ slug }, { title, content, user, slug:newSlug }, { new: true })
+    if (!post)
+        return res.status(400).json({ error: "udpate post error" })
+    return res.status(200).json(post)
+
+    
+};
+
+exports.remove = async (req, res) => {
+    // console.log(req.pramas.slug)
+    const { slug } = req.params;
+    const post = await Post.findOneAndDelete({ slug })
+    if (!post)
+        return res.status(400).json({ error: "delete post error" })
+    return res.status(200).json({ message: "post deleted"} )
+};
