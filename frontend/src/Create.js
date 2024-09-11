@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Nav from './Nav';
 import Title from './Title';
 import axios from 'axios'
+import { getUser, getToken } from './helpers';
 
 const Create = () => {
     const [state, setState] = useState({
         title: '',
         content: '',
-        user: ''
+        user: getUser()
     });
     const navigate = useNavigate();
     const { title, content, user } = state;
@@ -23,13 +24,16 @@ const Create = () => {
         event.preventDefault();
         // console.table({ title, content, user });
         axios
-            .post(`${process.env.REACT_APP_API}/post`, { title, content, user })
-            .then(response => {
+            .post(`${process.env.REACT_APP_API}/post`, { title, content, user }, {
+                headers: {
+                    authorization: `Bearer ${getToken()}`
+                }
+            }).then(response => {
                 console.log(response);
                 // empty state
                 setState({ ...state, title: '', content: '', user: '' });
                 // show sucess alert
-               navigate('/')
+                navigate('/')
             })
             .catch(error => {
                 console.log(error.response);
@@ -54,7 +58,7 @@ const Create = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">User</label>
-                    <input type="text" className="form-control" placeholder="Your name" required onChange={handleChange('user')} value={user}/>
+                    <input type="text" className="form-control" placeholder="Your name" required onChange={handleChange('user')} value={user} />
                 </div>
                 <div>
                     <button className="btn btn-primary">Create</button>
@@ -62,7 +66,7 @@ const Create = () => {
             </form>
         </div>
     );
-    
+
 }
 
 

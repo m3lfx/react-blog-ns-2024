@@ -1,6 +1,7 @@
-import React, { useState, useEffect }from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getToken } from './helpers';
 const Update = () => {
     const [state, setState] = useState({
         title: '',
@@ -9,7 +10,7 @@ const Update = () => {
         user: ''
     });
     const { title, content, user } = state;
-    let { slug }  = useParams();
+    let { slug } = useParams();
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +33,11 @@ const Update = () => {
         event.preventDefault();
         // console.table({ title, content, user });
         axios
-            .put(`${process.env.REACT_APP_API}/post/${slug}`, { title, content, user })
+            .put(`${process.env.REACT_APP_API}/post/${slug}`, { title, content, user }, {
+                headers: {
+                    authorization: `Bearer ${getToken()}`
+                }
+            })
             .then(response => {
                 console.log(response);
                 const { title, content, slug, user } = response.data;
@@ -40,7 +45,7 @@ const Update = () => {
                 setState({ ...state, title, content, slug, user });
                 // show sucess alert
                 // alert(`Post titled ${title} is updated`);
-                return navigate("/"); 
+                return navigate("/");
             })
             .catch(error => {
                 console.log(error.response);
@@ -91,7 +96,7 @@ const Update = () => {
 
     return (
         <div className="container pb-5">
-           
+
             <br />
             <h1>UPDATE POST</h1>
             {showUpdateForm()}

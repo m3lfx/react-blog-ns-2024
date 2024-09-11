@@ -4,7 +4,7 @@ import './App.css';
 import Nav from './Nav';
 import Title from './Title';
 import axios from 'axios';
-import { getUser } from './helpers';
+import { getUser, getToken } from './helpers';
 const App = () => {
   const [posts, setPosts] = useState([])
 
@@ -28,7 +28,11 @@ const App = () => {
   const deletePost = slug => {
     // console.log('delete', slug, ' post');
     axios
-      .delete(`${process.env.REACT_APP_API}/post/${slug}`)
+      .delete(`${process.env.REACT_APP_API}/post/${slug}`, 
+        { headers: {
+        authorization: `Bearer ${getToken()}`
+        }
+    })
       .then(response => {
         alert(response.data.message);
         fetchPosts();
