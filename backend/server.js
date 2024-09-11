@@ -5,12 +5,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const postRoutes = require('./routes/post');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', postRoutes);
+app.use('/api', authRoutes);
 
 mongoose
     .connect(process.env.DATABASE, {
